@@ -1,4 +1,28 @@
 {% extends "website/index.html" %} {% block title %}Dashboard{% endblock title%}
 {% block content %}
-<h1>Dashboard</h1>
+<section class="h-full">
+  <div class="flex justify-center items-center h-full flex-col gap-5">
+    <div class="some-heading h-[40%] w-full flex items-center justify-center text-6xl">Dashboard</div>
+    <div class="main-content flex flex-row w-full h-[50%] justify-center">
+      <div class="flex lg:flex-row w-[95%] justify-evenly gap-2.5 sm:flex-col">
+        <div class="first-card w-1/4 flex flex-col border rounded-3xl border-gray-600 gap-2.5 p-5">
+          <a href="{% url 'billing:home' %}"><div class="card-head flex justify-center h-15 items-center border-white border-2 rounded-3xl bg-white text-black hover:bg-gray-200 duration-300 font-medium">Billings and Payments</div></a>
+          <div class="card-content flex items-center h-full text-gray-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat aut molestiae itaque ducimus eos amet quas vero perferendis praesentium, saepe doloribus maiores, repellendus soluta? Nulla qui quibusdam porro, nihil aut modi architecto?</div>
+        </div>
+        <div class="second-card w-1/4 flex flex-col border rounded-3xl border-gray-600 gap-2.5 p-5">
+          <a href="{% url 'guests:home' %}"><div class="card-head flex justify-center h-15 items-center border-white border-2 rounded-3xl bg-white text-black hover:bg-gray-200 duration-300 font-medium">Guests Services</div></a>
+          <div class="card-content flex items-center h-full text-gray-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat aut molestiae itaque ducimus eos amet quas vero perferendis praesentium, saepe doloribus maiores, repellendus soluta? Nulla qui quibusdam porro, nihil aut modi architecto?</div>
+        </div>
+        <div class="third-card w-1/4 flex flex-col border rounded-3xl border-gray-600 gap-2.5 p-5">
+          <a href="{% url 'rooms:home' %}"><div class="card-head flex justify-center h-15 items-center border-white border-2 rounded-3xl bg-white text-black hover:bg-gray-200 duration-300 font-medium">Our Rooms</div></a>
+          <div class="card-content flex items-center h-full text-gray-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat aut molestiae itaque ducimus eos amet quas vero perferendis praesentium, saepe doloribus maiores, repellendus soluta? Nulla qui quibusdam porro, nihil aut modi architecto?</div>
+        </div>
+        <div class="fourth-card w-1/4 flex flex-col border rounded-3xl border-gray-600 gap-2.5 p-5">
+          <a href="{% url 'services:home' %}"><div class="card-head flex justify-center h-15 items-center border-white border-2 rounded-3xl bg-white text-black hover:bg-gray-200 duration-300 font-medium">Our Services</div></a>
+          <div class="card-content flex items-center h-full text-gray-500">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat aut molestiae itaque ducimus eos amet quas vero perferendis praesentium, saepe doloribus maiores, repellendus soluta? Nulla qui quibusdam porro, nihil aut modi architecto?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock content %}
