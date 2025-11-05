@@ -7,4 +7,6 @@ from . import views
 app_name = 'guests'
 urlpatterns = [
     path('', views.guests, name = 'home'),
+    path('checkin/', views.checkin, name = 'checkin'),
+    path('checkout/', views.checkout, name = 'checkout'),
 ]

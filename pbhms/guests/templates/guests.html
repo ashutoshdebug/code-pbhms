@@ -1,4 +1,16 @@
 {% extends "website/index.html" %} {% block title %}Guests{% endblock title %}
 {% block content %}
-<h1>Guests</h1>
+<section>
+    <div class="w-full h-full flex justify-center flex-col items-center gap-10">
+        <div class="w-full flex justify-center text-6xl">
+            What do you want to do?
+        </div>
+        <div class="">
+            <ul class = "flex lg:flex-row sm:flex-col w-full gap-5">
+                <a href="{% url 'guests:checkin' %}"><li class = "bg-white rounded-3xl text-black min-w-[10vw] max-w-[15vw] h-10 flex items-center justify-center font-medium">Guest Check In</li></a>
+                <a href="{% url 'guests:checkout' %}"><li class = "bg-white rounded-3xl text-black min-w-[10vw] max-w-[15vw] h-10 flex items-center justify-center font-medium">Guest Check Out</li></a>
+            </ul>
+        </div>
+    </div>
+</section>
 {% endblock content %}

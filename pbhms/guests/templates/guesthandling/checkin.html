@@ -1,0 +1,16 @@
+{% extends "website/index.html" %}
+{% block title %}Checkin{% endblock title %}
+{% block content %}
+<section>
+    <div class="w-full h-full flex items-center justify-center flex-col">
+        <div class="">Enter the Details of the Guest</div>
+        <div class="form-div">
+            <form method = "POST" class = "">
+                {% csrf_token %}
+                <button type="submit" class= "cursor-pointer">Submit</button>
+            </form>
+            
+        </div>
+    </div>
+</section>
+{% endblock content %}
