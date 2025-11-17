@@ -1,16 +1,109 @@
-{% extends "website/index.html" %}
-{% block title %}Checkin{% endblock title %}
+{% extends "website/index.html" %} {% block title %}Checkin{% endblock title %}
 {% block content %}
-<section>
-    <div class="w-full h-full flex items-center justify-center flex-col">
-        <div class="">Enter the Details of the Guest</div>
-        <div class="form-div">
-            <form method = "POST" class = "">
-                {% csrf_token %}
-                <button type="submit" class= "cursor-pointer">Submit</button>
-            </form>
-            
+<section class="mt-10">
+  <div class="w-full h-full flex items-center justify-center flex-col gap-10">
+    <div class="text-5xl font-bold">Add or fetch details about Guests</div>
+    <div class="w-[95%] flex flex-row justify-center gap-4">
+      <div class="w-full flex flex-col gap-4">
+        <div class="text-2xl font-bold">
+          Add details to the Check-In DataBase
         </div>
+        <div class="form-div w-full">
+          {% if form.errors %}
+          <div class="text-red-500 mb-4">{{ form.errors }}</div>
+          {% endif %}
+
+          <form method="POST" action="{% url 'guests:checkin' %}">
+            {% csrf_token %}
+
+            <div class="flex flex-col border border-white p-4 rounded-2xl">
+              <div class="">
+                <label for="{{form.room_type.id_for_label}}">Room Type:</label>
+                {{form.room_type}} {{form.room_type.errors}}
+              </div>
+              <div class="text-white">
+                <label for="{{form.date.id_for_label}}">Date:</label>
+                {{form.date}} {{form.date.errors}}
+              </div>
+              <div class="">
+                <label for="{{form.name.id_for_label}}"
+                  >Name of the Guest:</label
+                >
+                {{form.name}} {{form.name.errors}}
+              </div>
+              <div class="">
+                <label for="{{form.aadhaar_card.id_for_label}}"
+                  >Aadhaar Card:</label
+                >
+                {{form.aadhaar_card}} {{form.aadhaar_card.errors}}
+              </div>
+              <div class="">
+                <label for="{{form.mobile.id_for_label}}">Mobile No.:</label>
+                {{form.mobile}} {{form.mobile.errors}}
+              </div>
+              <div class="">
+                <label for="{{form.alloted_room.id_for_label}}"
+                  >Alloted Room No.:</label
+                >
+                {{form.alloted_room}} {{form.alloted_room.errors}}
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="cursor-pointer p-1 w-full bg-white hover:bg-gray-100 duration-300 font-medium text-black rounded-xl mt-4"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="w-full flex flex-col gap-4">
+        <div class="text-2xl font-bold">
+          Fetch Details from the Check-In DataBase
+        </div>
+        <div class="form-div w-full">
+          {% if form.errors %}
+          <div class="text-red-500 mb-4">{{ form.errors }}</div>
+          {% endif %}
+          <form method="GET" action="{% url 'guests:checkin' %}" class="w-full">
+            <div class="flex flex-col border border-white p-4 rounded-2xl">
+              <label class="text-white font-medium">Aadhaar Card:</label>
+
+              <input
+                type="text"
+                name="aadhaar_search"
+                placeholder="Enter Aadhaar Number"
+                class="text-white p-2 rounded"
+              />
+
+              {% if guest %}
+              <div class="text-white mt-4">
+                <h2 class="font-bold text-lg">Guest Details</h2>
+                <p><strong>Name:</strong> {{ guest.name }}</p>
+                <p><strong>Room Type:</strong> {{ guest.room_type }}</p>
+                <p><strong>Date:</strong> {{ guest.date }}</p>
+                <p><strong>Mobile:</strong> {{ guest.mobile }}</p>
+                <p><strong>Alloted Room:</strong> {{ guest.alloted_room }}</p>
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="flex flex-row gap-1">
+              <button
+              type="submit"
+              class="cursor-pointer p-1 w-1/2 bg-white hover:bg-gray-100 duration-300 font-medium text-black rounded-xl mt-4"
+            >
+              Search
+            </button>
+            <button type="submit" class="cursor-pointer p-1 w-1/2 bg-white hover:bg-gray-100 duration-300 font-medium text-black rounded-xl mt-4 {% if not guest %} opacity-50 cursor-not-allowed {% endif %}" onclick = window.location.href = "{% url 'guests:checkin' %}" {% if not guest %} disabled {% endif %}>
+              Clear
+            </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 {% endblock content %}

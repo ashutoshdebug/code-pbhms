@@ -15,7 +15,7 @@
           class="flex justify-evenly h-full bg-red bg-opacity-10 rounded-xl shadow-xl backdrop-blur border-white border-0 border-opacity-25"
         >
           <div class="left-nav w-1/2 h-full flex items-center">
-            <a href="#" class = "pl-4">
+            <a href="{% url 'home' %}" class = "pl-4">
               <svg
               width="70%"
               height="70%"
@@ -104,7 +104,7 @@
           <div class="text-sm/loose italic">Feels like Home...</div>
         </div>
         <div class="w-full flex justify-center">
-          <a href="{% url 'dashboard:home' %}" class = "bg-white hover:bg-[#c5c5c5] text-black h-10 w-[20vh] items-center justify-center flex rounded-full mt-4 font-bold transition-colors duration-150">
+          <a href="{% url 'dashboard:home' %}" class = "bg-white hover:bg-[#c5c5c5] text-black h-10 w-[20vh] items-center justify-center flex rounded-full mt-4 font-medium transition-colors duration-150">
             Explore!
           </a>
         </div>
