@@ -25,8 +25,20 @@ class CheckIn(models.Model):
 class CheckOut(models.Model):
     check_in = models.OneToOneField(CheckIn, on_delete = models.CASCADE, related_name = 'checkout')
     checkout_date = models.DateTimeField(default = timezone.now)
-    no_of_days = models.PositiveIntegerField(default = 1)
+    no_of_days = models.PositiveIntegerField(editable=False)
+
     # total = models.OneToOneField(Billing, on_delete = models.CASCADE, default = 0)
+    def save(self, *args, **kwargs):
+        checkin_date = self.check_in.date
+        checkout_date = self.checkout_date
+
+        # difference in date
+        delta_days = (checkout_date.date() - checkin_date.date()).days
+
+        # Ensure minimum 1 day
+        self.no_of_days = max(delta_days, 1)
+
+        super().save(*args, **kwargs)
     
 
     def __str__(self):

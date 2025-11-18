@@ -1,4 +1,41 @@
 {% extends "website/index.html" %} {% block title %}Rooms{% endblock title %}
+{% load static %}
 {%block content %}
-<h1>Rooms</h1>
+<section style = "margin-top:100px">
+    <div class="flex flex-col justify-center w-full">
+        <div class="w-full flex justify-center font-bold text-6xl mt-10">
+            Our Rooms
+        </div>
+        <div class="w-full flex flex-col items-center justify-center mt-10 gap-10">
+            <div class="flex flex-row w-[95%] justify-center items-center gap-2.5">
+                <div class="w-1/2 overflow-hidden flex flex-col gap-5">
+                    <div class="font-bold text-5xl">Suite Room</div>
+                    <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Est earum quam tempore sequi iste ducimus saepe enim blanditiis culpa, vero atque inventore qui sit? Numquam quae ut eveniet dolorum neque.</div>
+                </div>
+                <div class="w-1/2 overflow-hidden"><img src="{% static 'img/suite.jpg' %}" alt="" class = "w-full rounded-3xl"></div>
+            </div>
+            <div class="flex w-[95%] justify-center items-center gap-2.5" style = "flex-direction:row-reverse">
+                <div class="w-1/2 overflow-hidden flex flex-col gap-5">
+                    <div class="font-bold text-5xl">Deluxe Room</div>
+                    <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius architecto amet ipsam explicabo et excepturi repellat saepe hic inventore nesciunt, vitae deserunt tempore! Cupiditate deserunt dolorum quisquam dicta praesentium est.</div>
+                </div>
+                <div class="w-1/2 overflow-hidden"><img src="{% static 'img/deluxe.jpg' %}" alt="" class = "w-full rounded-3xl"></div>
+            </div>
+            <div class="flex flex-row w-[95%] justify-center items-center gap-2.5">
+                <div class="w-1/2 overflow-hidden flex flex-col gap-5">
+                    <div class="font-bold text-5xl">AC Room</div>
+                    <div class="">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Similique libero dolores eligendi, perspiciatis culpa at ullam mollitia nobis fugiat obcaecati illo ut id! Laudantium debitis saepe voluptate fuga, esse non!</div>
+                </div>
+                <div class="w-1/2 overflow-hidden"><img src="{% static 'img/AC.jpg' %}" alt="" class = "w-full rounded-3xl"></div>
+            </div>
+            <div class="flex w-[95%] justify-center items-center gap-2.5" style = "flex-direction:row-reverse">
+                <div class="w-1/2 overflow-hidden flex flex-col gap-5">
+                    <div class="font-bold text-5xl">Non-AC Room</div>
+                    <div class="">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit autem laboriosam maiores deserunt omnis sapiente incidunt dolor. Reprehenderit non tenetur expedita labore maxime iste corrupti repellat, alias quisquam eos! Labore?</div>
+                </div>
+                <div class="w-1/2 overflow-hidden"><img src="{% static 'img/Non-AC.jpg' %}" alt="" class = "w-full rounded-3xl"></div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock content %}

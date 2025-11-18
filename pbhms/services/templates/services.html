@@ -1,4 +1,30 @@
-{% extends "website/index.html" %} {% block title %}Services{% endblock title %}
-{% block content %}
-<h1>Services</h1>
-{% endblock content %}
+{% extends "website/index.html" %} {% load static %} {% block title %}Services{%endblock %} {% block content %}
+
+<section style="margin-top: 100px">
+  <div class="flex flex-col font-bold text-5xl w-full justify-center items-center gap-5">
+    <div class="">Our Services</div>
+    <div class="w-full flex justify-center items-center">
+      <table class="border-collapse">
+    <thead>
+        <tr>
+            {% for h in head %}
+            <th class="px-8 py-4 font-medium text-2xl border">{{ h }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in roomdata %}
+        <tr>
+            {% for cell in row %}
+            <td class="px-6 py-4 border">{{ cell }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

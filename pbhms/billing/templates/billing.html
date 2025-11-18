@@ -1,4 +1,132 @@
-{% extends "website/index.html" %} {% block title %}Billing{% endblock title %}
+{% extends "website/index.html" %} {% block title %}Billing and Payments{% endblock title %}
 {% block content %}
-<h1>Its billing page</h1>
+<section style = "margin-top:100px">
+  <div class="w-full h-full flex items-center justify-center flex-col gap-10">
+    <div class="text-5xl font-bold">Create Bills for a Guest stay</div>
+    <div class="w-[95%] flex flex-row justify-center gap-4">
+      <div class="w-full flex flex-col gap-4">
+        <div class="text-2xl font-bold">
+            Calculate total bill for a guest:
+        </div>
+        <div class="form-div w-full">
+          {% if form.errors %}
+          <div class="text-red-500 mb-4">{{ form.errors }}</div>
+          {% endif %}
+
+          <form method="POST" action="{% url 'billing:home' %}">
+            {% csrf_token %}
+
+            <div class="flex flex-col border border-white p-4 rounded-2xl">
+              <div class="">
+                <label for="{{form.check_in.id_for_label}}">Select Guest from Check-In:</label>
+                {{form.check_in}}
+                {{form.check_in.errors}}
+              </div>
+              <div class="">
+                <label for="{{form.check_out.id_for_label}}">Select Guest from Check-Out:</label>
+                {{form.check_out}}
+                {{form.check_out.errors}}
+              </div>
+              <div class="">
+                <label for="{{form.room_service.id_for_label}}">Room service (if taken):</label>
+                {{form.room_service}}
+                {{form.room_service.errors}}
+              </div>
+              <div class="">
+                <label for="{{form.food.id_for_label}}">Food Bill (if ordered):</label>
+                {{form.food}}
+                {{form.food.errors}}
+              </div>
+              <div class="">
+                <label for="{{form.bottles.id_for_label}}">Water Bottles (if taken):</label>
+                {{form.bottles}}
+                {{form.bottles.errors}}
+              </div>
+              <div class="">
+                <label for="{{form.in_room_facilities.id_for_label}}">In Room Facilities (if taken):</label>
+                {{form.in_room_facilities}}
+                {{form.in_room_facilities.errors}}
+              </div>
+              <div class="">
+                <label for="{{form.miscellaneous.id_for_label}}">Miscellaneous Bill:</label>
+                {{form.miscellaneous}}
+                {{form.miscellaneous.errors}}
+              </div>
+              {% comment %} <div class="">
+                <label for="{{form.room_bill.id_for_label}}">Room Bill:</label>
+                {{form.room_bill}}
+                {{form.room_bill.errors}}
+              </div> {% endcomment %}
+              <div class="">
+                <label for="{{form.date.id_for_label}}">Date and Time:</label>
+                {{form.date}}
+                {{form.date.errors}}
+              </div>
+              {% comment %} <div class="">
+                <label for="{{form.total.id_for_label}}">Total:</label>
+                {{form.total}}
+                {{form.total.errors}}
+              </div> {% endcomment %}
+            </div>
+
+            <button
+              type="submit"
+              class="cursor-pointer p-1 w-full bg-white hover:bg-gray-100 duration-300 font-medium text-black rounded-xl mt-4"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="w-full flex flex-col gap-4">
+        <div class="text-2xl font-bold">
+          Fetch Bill details of a Guest:
+        </div>
+        <div class="form-div w-full">
+          {% if form.errors %}
+          <div class="text-red-500 mb-4">{{ form.errors }}</div>
+          {% endif %}
+          <form method="GET" action="{% url 'billing:home' %}" class="w-full">
+            <div class="flex flex-col border border-white p-4 rounded-2xl">
+              <label class="text-white font-medium">Aadhaar Card:</label>
+
+              <input
+                type="text"
+                name="aadhaar_search"
+                placeholder="Enter Aadhaar Number"
+                class="text-white p-2 rounded"
+              />
+
+              {% if guest %}
+              <div class="text-white mt-4">
+                <h2 class="font-bold text-lg">Guest Details</h2>
+                <p><strong>Name:</strong> {{ guest.check_in }}</p>
+                <p><strong>Aadhaar Card:</strong>{{guest.check_in.aadhaar_card}}</p>
+                <p><strong>No. of Day(s):</strong> {{ guest.no_of_days }}</p>
+                <p><strong>Date of checkin:</strong> {{ guest.check_in.date }}</p>
+                <p><strong>Date of checkout:</strong> {{ guest.checkout_date }}</p>
+                <p><strong>Mobile:</strong> {{ guest.check_in.mobile }}</p>
+                <p><strong>Alloted Room:</strong> {{ guest.check_in.alloted_room }}</p>
+                <p><strong>Bill:</strong> {{ guest.bill }}</p>
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="flex flex-row gap-1">
+              <button
+              type="submit"
+              class="cursor-pointer p-1 w-1/2 bg-white hover:bg-gray-100 duration-300 font-medium text-black rounded-xl mt-4"
+            >
+              Search
+            </button>
+            <button type="submit" class="cursor-pointer p-1 w-1/2 bg-white hover:bg-gray-100 duration-300 font-medium text-black rounded-xl mt-4 {% if not guest %} opacity-50 cursor-not-allowed {% endif %}" onclick = window.location.href = "{% url 'guests:checkout' %}" {% if not guest %} disabled {% endif %}>
+              Clear
+            </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock content %}

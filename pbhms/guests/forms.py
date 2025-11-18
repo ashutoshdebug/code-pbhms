@@ -1,6 +1,6 @@
 from django import forms
 from django.utils import timezone
-from .models import CheckIn
+from .models import CheckIn, CheckOut
 
 class checkin_form(forms.ModelForm):
     class Meta:
@@ -13,7 +13,17 @@ class checkin_form(forms.ModelForm):
             'aadhaar_card': forms.TextInput(attrs={'placeholder': "Enter the Aadhaar Card number of the Guest", 'class': 'w-[100%] focus:outline-none rounded p-1', 'minlength':12}),
             'mobile': forms.TextInput(attrs={'placeholder': "Enter the mobile number of the Guest", 'class': 'w-[100%] focus:outline-none rounded p-1', 'minlength':10}),
             'alloted_room': forms.TextInput(attrs={'placeholder': 'Enter the alloted room number of the Guest', 'class': 'w-[100%] focus:outline-none rounded p-1', 'minlength':3})
-            
+        }
+
+class checkout_form(forms.ModelForm):
+    class Meta:
+        model = CheckOut
+        fields = ['check_in', 'checkout_date',]
+        exculde = ['no_of_days',]
+        widgets = {
+            'check_in': forms.Select(attrs={'class': 'focus:outline-none bg-black text-white rounded'}),
+            'checkout_date': forms.DateTimeInput(attrs={'value': timezone.now().strftime('%Y-%m-%d %H:%M:%S'), 'class': 'focus:outline-none' ,'readonly': 'readonly'}),
+            'no_of_days': forms.TextInput(attrs={'class': 'focus:outline-none', 'placeholder': 'Enter the number of days of stay'}),
         }
 
 

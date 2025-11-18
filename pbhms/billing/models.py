@@ -7,12 +7,12 @@ class Billing(models.Model):
     check_out = models.OneToOneField(CheckOut, on_delete=models.CASCADE, related_name='bill', null=True, blank=True)
     check_in = models.ForeignKey(CheckIn, on_delete=models.CASCADE, related_name='bills')
 
-    room_bill = models.DecimalField(max_digits=10, decimal_places=2, default=0, editable=False)
-    room_service = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    food = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    bottles = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    in_room_facilities = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    miscellaneous = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    room_bill = models.DecimalField(max_digits=10, decimal_places=2, editable=False)
+    room_service = models.DecimalField(max_digits=10, decimal_places=2)
+    food = models.DecimalField(max_digits=10, decimal_places=2)
+    bottles = models.DecimalField(max_digits=10, decimal_places=2)
+    in_room_facilities = models.DecimalField(max_digits=10, decimal_places=2)
+    miscellaneous = models.DecimalField(max_digits=10, decimal_places=2)
 
     total = models.DecimalField(max_digits=12, decimal_places=2, default=0, editable=False)
     date = models.DateTimeField(default=timezone.now)
@@ -49,4 +49,4 @@ class Billing(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"Bill for {self.check_in.name} – Rs.{self.total}"
+        return  f"Rs.{self.total}"

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import CheckIn
-from .forms import checkin_form
+from .models import CheckIn, CheckOut
+from .forms import checkin_form, checkout_form
 
 # Create your views here.
 def guests(request):
@@ -34,4 +34,21 @@ def checkin(request):
         
 
 def checkout(request):
-    return render(request, 'guesthandling/checkout.html')
+    # return render(request, 'guesthandling/checkout.html')
+    guest = None
+    aadhaar_search = request.GET.get("aadhaar_search")
+    if aadhaar_search:
+        try:
+            guest = CheckOut.objects.get(check_in__aadhaar_card = aadhaar_search)
+        except CheckOut.DoesNotExist:
+            guest = None
+
+    if request.method == "POST":
+        form1 = checkout_form(request.POST)
+        if form1.is_valid():
+            form1.save()
+            return redirect('guests:checkout')
+    else:
+        form1 = checkout_form()
+    return render(request, 'guesthandling/checkout.html', {'form1': form1, 'guest': guest,})
+    
